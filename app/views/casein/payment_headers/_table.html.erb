@@ -13,10 +13,10 @@
 	
 	<% payment_headers.each do |payment_header| %>
 		<tr>
-			<td><%= casein_table_cell_link payment_header.user_id, casein_payment_header_path(payment_header) %></td>
-			<td><%= casein_table_cell_link payment_header.account_id, casein_payment_header_path(payment_header) %></td>
+			<td><%= casein_table_cell_link current_user.name, casein_payment_header_path(payment_header) %></td>
+			<td><%= casein_table_cell_link Account.find(payment_header.account_id).name, casein_payment_header_path(payment_header) %></td>
 			<td><%= casein_table_cell_link payment_header.payable_on, casein_payment_header_path(payment_header) %></td>
-			<td><%= casein_table_cell_link payment_header.project_id, casein_payment_header_path(payment_header) %></td>
+			<td><%= casein_table_cell_link Project.find(payment_header.project_id).name, casein_payment_header_path(payment_header) %></td>
 			<td class="delete">
 				<%= link_to(casein_show_row_icon("trash"), casein_payment_header_path(payment_header), :method => :delete, :data => { :confirm => "Are you sure you want to delete this payment header?" }) %>
 			</td>
