@@ -9,6 +9,7 @@
 			<th><%= casein_sort_link "Category", :category %></th>
 			<th><%= casein_sort_link "Ac no", :ac_no %></th>
 			<th>&nbsp;</th>
+			<th>&nbsp;</th>
 		</tr>
 	</thead>
 	
@@ -19,6 +20,9 @@
 			<td><%= casein_table_cell_link account.bank_branch, casein_account_path(account) %></td>
 			<td><%= casein_table_cell_link account.category, casein_account_path(account) %></td>
 			<td><%= casein_table_cell_link account.ac_no, casein_account_path(account) %></td>
+			<td class="new">
+				<%= link_to(casein_show_row_icon("plus-sign"), new_casein_payment_header_path) %>
+			</td>
 			<td class="delete">
 				<%= link_to(casein_show_row_icon("trash"), casein_account_path(account), :method => :delete, :data => { :confirm => "Are you sure you want to delete this account?" }) %>
 			</td>
