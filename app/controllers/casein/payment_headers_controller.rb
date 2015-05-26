@@ -19,7 +19,11 @@ module Casein
   
     def new
       @casein_page_title = 'Add a new payment header'
-    	@payment_header = PaymentHeader.new
+			@account = Account.find(params[:account_id]);
+    	@payment_header = PaymentHeader.new(
+				:user_id => current_user.id,
+				:account_id => @account.id
+				)
     end
 
     def create

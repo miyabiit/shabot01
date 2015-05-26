@@ -3,10 +3,10 @@
 
 <div class="row">
 	<div class="col-lg-6">
-		<%= casein_text_field f, f.object, :user_id %>
+		<%= current_user.name %>
 	</div>
 	<div class="col-lg-6">
-		<%= casein_text_field f, f.object, :account_id %>
+		<%= @account.name %>
 	</div>
 </div>
 
@@ -15,6 +15,7 @@
 		<%= casein_date_select f, f.object, :payable_on %>
 	</div>
 	<div class="col-lg-6">
-		<%= casein_text_field f, f.object, :project_id %>
+		<% projects = Project.all %>
+		<%= casein_collection_select f, f.object, :payment_header, :project_id, projects, :id, :name, :include_blank => true  %>
 	</div>
 </div>
