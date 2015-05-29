@@ -16,6 +16,12 @@ module Casein
       @casein_page_title = 'View payment header'
       @payment_header = PaymentHeader.find params[:id]
     end
+
+		def add_part
+      @payment_header = PaymentHeader.find(params[:id]) 
+      @payment_header.payment_parts << PaymentPart.new
+      render :action => :show
+		end
   
     def new
       @casein_page_title = 'Add a new payment header'
@@ -28,10 +34,12 @@ module Casein
 
     def create
       @payment_header = PaymentHeader.new payment_header_params
+			@payment_header.payment_parts.push PaymentPart.new
     
       if @payment_header.save
         flash[:notice] = 'Payment header created'
-        redirect_to casein_payment_headers_path
+        #redirect_to casein_payment_headers_path
+        render :action => :show
       else
         flash.now[:warning] = 'There were problems when trying to create a new payment header'
         render :action => :new
@@ -45,7 +53,8 @@ module Casein
     
       if @payment_header.update_attributes payment_header_params
         flash[:notice] = 'Payment header has been updated'
-        redirect_to casein_payment_headers_path
+        #redirect_to casein_payment_headers_path
+        render :action => :show
       else
         flash.now[:warning] = 'There were problems when trying to update this payment header'
         render :action => :show

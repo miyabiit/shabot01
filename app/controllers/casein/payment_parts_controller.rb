@@ -41,10 +41,14 @@ module Casein
     
       if @payment_part.update_attributes payment_part_params
         flash[:notice] = 'Payment part has been updated'
-        redirect_to casein_payment_parts_path
+				@payment_header = PaymentHeader.find @payment_part.payment_header_id
+        redirect_to casein_payment_header_path(@payment_header)
+        #render :controller => :payment_header, :action => :show
       else
         flash.now[:warning] = 'There were problems when trying to update this payment part'
-        render :action => :show
+				@payment_header = PaymentHeader.find @payment_part.payment_header_id
+        redirect_to casein_payment_header_path(@payment_header)
+        #render :controller => :payment_header, :action => :show
       end
     end
  

@@ -3,10 +3,15 @@ Rails.application.routes.draw do
 	#Casein routes
 	namespace :casein do
 		resources :payment_parts
-		resources :payment_headers
+		#resources :payment_headers
 		resources :accounts
 		resources :items
 		resources :projects
+		resources :payment_headers do
+			member do
+				get 'add_part'
+			end
+		end
 	end
 
   # The priority is based upon order of creation: first created -> highest priority.
