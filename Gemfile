@@ -44,3 +44,5 @@ group :development, :test do
 end
 
 gem 'casein', '~>5.1.1'
+gem 'prawn'
+

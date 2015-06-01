@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 		resources :payment_headers do
 			member do
 				get 'add_part'
+				get 'pdf'
 			end
 		end
 	end

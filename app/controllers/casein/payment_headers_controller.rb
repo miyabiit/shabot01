@@ -17,6 +17,15 @@ module Casein
       @payment_header = PaymentHeader.find params[:id]
     end
 
+		def pdf
+      payment_header = PaymentHeader.find params[:id]
+			pdf = PaymentReport.new(payment_header)
+			send_data pdf.render,
+				filename:	"payment.pdf",
+				type:			"application/pdf",
+				disposition:	"inline"
+		end
+
 		def add_part
       @payment_header = PaymentHeader.find(params[:id]) 
       @payment_header.payment_parts << PaymentPart.new
