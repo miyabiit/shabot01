@@ -9,7 +9,7 @@ module Casein
   
     def index
       @casein_page_title = 'Accounts'
-  		@accounts = Account.order(sort_order(:name)).paginate :page => params[:page]
+  		@accounts =  Account.search(params[:search]).order(sort_order(:name)).paginate :page => params[:page]
     end
   
     def show
