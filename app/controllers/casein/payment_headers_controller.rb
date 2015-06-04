@@ -47,8 +47,7 @@ module Casein
     
       if @payment_header.save
         flash[:notice] = 'Payment header created'
-        #redirect_to casein_payment_headers_path
-        render :action => :show
+      	redirect_to casein_payment_header_path(@payment_header)
       else
         flash.now[:warning] = 'There were problems when trying to create a new payment header'
         render :action => :new
