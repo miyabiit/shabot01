@@ -76,8 +76,8 @@ class PaymentReport < Prawn::Document
 		# value
 		account = Account.find(@payment.account_id)
 		# cols = %w(個人コード 所属 勘定科目１ 勘定科目２ 勘定科目３ 勘定科目４ 勘定科目５ 支払日 振込先 事業名 予算区分)
-		draw_text Casein::AdminUser.find(@payment.user_id).name, :size => 12, :at => [100 ,( (700 - 25 + 7) - (25 * 0))]
-		draw_text Casein::AdminUser.find(@payment.user_id).email, :size => 12, :at => [100 ,( (700 - 25 + 7) - (25 * 1))]
+		draw_text Casein::AdminUser.find(@payment.user_id).member_code.to_s, :size => 12, :at => [100 ,( (700 - 25 + 7) - (25 * 0))]
+		draw_text Casein::AdminUser.find(@payment.user_id).section.to_s, :size => 12, :at => [100 ,( (700 - 25 + 7) - (25 * 1))]
 		@payment.payment_parts.each_with_index do |part, i|
 			draw_text Item.find(part.item_id).name , :size => 12, :at => [100 ,( (700 - 25 + 7) - (25 * (i + 2)))]
 		end
@@ -90,7 +90,7 @@ class PaymentReport < Prawn::Document
 		draw_text Account.find(@payment.account_id).name, :size => 12, :at => [330 ,( (700 - 25 + 7) - (25 * 1))]
 		total = 0
 		@payment.payment_parts.each_with_index do |part, i|
-			text_box part.amount.to_i.to_s, :size => 12, :at => [330 ,( (700 - 25) - (25 * (i + 2)))], :width => 150, :height => 25, :align => :right, :valign => :center
+			text_box part.amount.to_i.to_s, :size => 12, :at => [330 ,( 700 - (25 * (i + 2)))], :width => 150, :height => 25, :align => :right, :valign => :center
 			total += part.amount
 		end
 		text_box total.to_i.to_s, :size => 12, :at => [330 ,( (700 - 25) - (25 * 6))], :width => 150, :height => 25, :align => :right, :valign => :center
