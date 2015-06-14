@@ -14,7 +14,7 @@
 	
 	<% payment_headers.each do |payment_header| %>
 		<tr>
-			<td><%= casein_table_cell_link current_user.name, casein_payment_header_path(payment_header) %></td>
+			<td><%= casein_table_cell_link Casein::AdminUser.find(payment_header.user_id).name, casein_payment_header_path(payment_header) %></td>
 			<td><%= casein_table_cell_link payment_header.slip_no, casein_payment_header_path(payment_header) %></td>
 			<td><%= casein_table_cell_link Account.find(payment_header.account_id).name, casein_payment_header_path(payment_header) %></td>
 			<td><%= casein_table_cell_link payment_header.payable_on, casein_payment_header_path(payment_header) %></td>
