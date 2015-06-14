@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150614024040) do
+ActiveRecord::Schema.define(version: 20150614115442) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 20150614024040) do
     t.string   "ac_no"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "fee_who_paid"
   end
 
   create_table "casein_admin_users", force: :cascade do |t|
@@ -55,6 +54,20 @@ ActiveRecord::Schema.define(version: 20150614024040) do
     t.datetime "updated_at"
   end
 
+  create_table "number_masters", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "now_val"
+    t.integer  "max_val"
+    t.integer  "min_val"
+    t.string   "prefix"
+    t.integer  "steps",      default: 1
+    t.string   "type"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "number_masters", ["type"], name: "index_number_masters_on_type"
+
   create_table "payment_headers", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "account_id"
@@ -64,8 +77,9 @@ ActiveRecord::Schema.define(version: 20150614024040) do
     t.datetime "updated_at"
     t.string   "org_name"
     t.string   "slip_no"
-    t.text     "commment"
+    t.text     "comment"
     t.string   "budget_code"
+    t.string   "fee_who_paid"
   end
 
   create_table "payment_parts", force: :cascade do |t|

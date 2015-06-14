@@ -37,7 +37,8 @@ module Casein
 			@account = Account.find(params[:account_id]);
     	@payment_header = PaymentHeader.new(
 				:user_id => current_user.id,
-				:account_id => @account.id
+				:account_id => @account.id,
+				:slip_no => SlipNo.get_num
 				)
     end
 
@@ -80,7 +81,7 @@ module Casein
     private
       
       def payment_header_params
-        params.require(:payment_header).permit(:user_id, :account_id, :payable_on, :project_id)
+        params.require(:payment_header).permit(:user_id, :account_id, :payable_on, :project_id, :org_name, :slip_no, :comment, :budget_code, :fee_who_paid)
       end
 
   end

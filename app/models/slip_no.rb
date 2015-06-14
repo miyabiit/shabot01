@@ -1,0 +1,2 @@
+class SlipNo < NumberMaster
+end

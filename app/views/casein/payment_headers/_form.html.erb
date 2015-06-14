@@ -2,22 +2,35 @@
 
 
 <div class="row">
-	<div class="col-lg-6">
-		<%= current_user.name %>
+	<div class="col-lg-4">
 		<%= casein_hidden_field f, f.object, :user_id  %>
-	</div>
-	<div class="col-lg-6">
-		<%= Account.find(f.object.account_id).name %>
 		<%= casein_hidden_field f, f.object, :account_id  %>
+		<%= casein_hidden_field f, f.object, :slip_no  %>
+		<%= 'No. ' + f.object.slip_no.to_s  %>
+		<%= casein_select f, f.object, :org_name, PaymentHeader::ORG_NAMES, {:casein_label => '請求元法人'} %>
+	</div>
+	<div class="col-lg-4">
+		<%= '請求先 ' + Account.find(f.object.account_id).name %>
+		<%= casein_text_field f, f.object, :budget_code, {:casein_label => '予算区分'} %>
+	</div>
+	<div class="col-lg-4">
+		<%= '_' %>
+		<%= casein_select f, f.object, :fee_who_paid, PaymentHeader::WHO_PAY, {:casein_label => '振込手数料'} %>
 	</div>
 </div>
 
 <div class="row">
-	<div class="col-lg-6">
-		<%= casein_date_select f, f.object, :payable_on %>
+	<div class="col-lg-4">
+		<%= casein_date_select f, f.object, :payable_on, {:casein_label => '支払日'} %>
 	</div>
-	<div class="col-lg-6">
+	<div class="col-lg-4">
 		<% projects = Project.all %>
-		<%= casein_collection_select f, f.object, :payment_header, :project_id, projects, :id, :name %>
+		<%= casein_collection_select f, f.object, :payment_header, :project_id, projects, :id, :name_and_category, {:casein_label => '事業・プロジェクト'} %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<%= casein_text_area f, f.object, :comment, {:casein_label => '効果・適用・目的'} %>
 	</div>
 </div>

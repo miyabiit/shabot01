@@ -56,10 +56,10 @@ class PaymentReport < Prawn::Document
 
 		# label
 		fill_color "0000ff"
-		draw_text "株式会社シャロンテック", :size => 12, :at => [5,760]
+		draw_text @payment.org_name , :size => 12, :at => [5,760]
 		fill_color "000000"
 		draw_text "支払申請書", :size => 18, :at => [5,730]
-		draw_text "No.", :size => 12, :at => [5,710]
+		draw_text "No." + @payment.slip_no.to_s , :size => 12, :at => [5,710]
 
 		cols = %w(個人コード 所属 勘定科目１ 勘定科目２ 勘定科目３ 勘定科目４ 勘定科目５ 支払日 振込先 事業名 予算区分)
 		cols.each_with_index do |s, n|
@@ -84,6 +84,9 @@ class PaymentReport < Prawn::Document
 		draw_text @payment.payable_on.to_s, :size => 12, :at => [100 ,( (700 - 25 + 7) - (25 * 7))]
 		draw_text account.bank, :size => 12, :at => [100 ,( (700 - 25 + 7) - (25 * 8))]
 		draw_text Project.find(@payment.project_id).name, :size => 12, :at => [100 ,( (700 - 25 + 7) - (25 * 9))]
+		draw_text @payment.budget_code, :size => 12, :at => [100 ,( (700 - 25 + 7) - (25 * 10))]
+
+		text_box @payment.comment, :size => 12, :at => [5 ,( (700 - 25) - (25 * 11))], :width => 500, :height => 100, :align => :left, :valign => :top
 
 		# cols = %w(申請者 支払先 金額 金額 金額 金額 金額 計 支店・口座 PROJECT 振込手数料)
 		draw_text Casein::AdminUser.find(@payment.user_id).name, :size => 12, :at => [330 ,( (700 - 25 + 7) - (25 * 0))]
@@ -95,6 +98,7 @@ class PaymentReport < Prawn::Document
 		end
 		text_box total.to_i.to_s, :size => 12, :at => [330 ,( (700 - 25) - (25 * 6))], :width => 150, :height => 25, :align => :right, :valign => :center
 		draw_text account.bank_branch + " " + account.category + " " + account.ac_no.to_s, :size => 12, :at => [330 ,( (700 - 25 + 7) - (25 * 8))]
-		draw_text Project.find(@payment.project_id).name, :size => 12, :at => [330 ,( (700 - 25 + 7) - (25 * 9))]
+		draw_text Project.find(@payment.project_id).category, :size => 12, :at => [330 ,( (700 - 25 + 7) - (25 * 9))]
+		draw_text @payment.fee_who_paid, :size => 12, :at => [330 ,( (700 - 25 + 7) - (25 * 10))]
 	end
 end
