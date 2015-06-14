@@ -11,16 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150501082159) do
+ActiveRecord::Schema.define(version: 20150614024040) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
     t.string   "bank"
     t.string   "bank_branch"
     t.string   "category"
-    t.integer  "ac_no"
+    t.string   "ac_no"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "fee_who_paid"
   end
 
   create_table "casein_admin_users", force: :cascade do |t|
@@ -43,6 +44,8 @@ ActiveRecord::Schema.define(version: 20150501082159) do
     t.string   "time_zone"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "member_code"
+    t.string   "section"
   end
 
   create_table "items", force: :cascade do |t|
@@ -59,12 +62,16 @@ ActiveRecord::Schema.define(version: 20150501082159) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "org_name"
+    t.string   "slip_no"
+    t.text     "commment"
+    t.string   "budget_code"
   end
 
   create_table "payment_parts", force: :cascade do |t|
     t.integer  "payment_header_id"
     t.integer  "item_id"
-    t.float    "amount"
+    t.integer  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
