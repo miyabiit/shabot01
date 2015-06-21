@@ -7,6 +7,14 @@ class PaymentHeader < ActiveRecord::Base
 	validates :comment, length: { maximum: 200 }
 	validates :payment_parts, length: { maximum: MAX_PARTS_LENGTH }
 
+	def self.search(slip_no = nil)
+		if slip_no
+			PaymentHeader.where(['slip_no like ?', "%#{slip_no}%"])
+		else
+			PaymentHeader.all
+		end
+	end
+
 	def total
 		ttl = 0
 		self.payment_parts.each do |part|

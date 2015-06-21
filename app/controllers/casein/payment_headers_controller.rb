@@ -9,7 +9,7 @@ module Casein
   
     def index
       @casein_page_title = 'Payment headers'
-  		@payment_headers = PaymentHeader.order(sort_order(:user_id)).paginate :page => params[:page]
+  		@payment_headers = PaymentHeader.search(params[:search]).order(sort_order(:user_id)).paginate :page => params[:page]
     end
   
     def show
