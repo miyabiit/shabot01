@@ -10,7 +10,7 @@ class PaymentReport < Prawn::Document
 		)
 
 		@payment = payment_header
-		font "vendor/fonts/ipaexg.ttf"
+		font Rails.root.to_s + '/' + "vendor/fonts/ipaexg.ttf"
 		stroke_axis
 		
 		# lines
@@ -93,10 +93,10 @@ class PaymentReport < Prawn::Document
 		draw_text Account.find(@payment.account_id).name, :size => 12, :at => [330 ,( (700 - 25 + 7) - (25 * 1))]
 		total = 0
 		@payment.payment_parts.each_with_index do |part, i|
-			text_box part.amount.to_i.to_s, :size => 12, :at => [330 ,( 700 - (25 * (i + 2)))], :width => 150, :height => 25, :align => :right, :valign => :center
+			text_box part.amount.to_i.to_s(:delimited), :size => 12, :at => [330 ,( 700 - (25 * (i + 2)))], :width => 150, :height => 25, :align => :right, :valign => :center
 			total += part.amount
 		end
-		text_box total.to_i.to_s, :size => 12, :at => [330 ,( (700 - 25) - (25 * 6))], :width => 150, :height => 25, :align => :right, :valign => :center
+		text_box total.to_i.to_s(:delimited), :size => 12, :at => [330 ,( (700 - 25) - (25 * 6))], :width => 150, :height => 25, :align => :right, :valign => :center
 		draw_text account.bank_branch + " " + account.category + " " + account.ac_no.to_s, :size => 12, :at => [330 ,( (700 - 25 + 7) - (25 * 8))]
 		draw_text Project.find(@payment.project_id).category, :size => 12, :at => [330 ,( (700 - 25 + 7) - (25 * 9))]
 		draw_text @payment.fee_who_paid, :size => 12, :at => [330 ,( (700 - 25 + 7) - (25 * 10))]

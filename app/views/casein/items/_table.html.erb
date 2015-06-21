@@ -14,7 +14,9 @@
 			<td><%= casein_table_cell_link item.name, casein_item_path(item) %></td>
 			<td><%= casein_table_cell_link item.group, casein_item_path(item) %></td>
 			<td class="delete">
+			<% if @session_user.is_admin? %>
 				<%= link_to(casein_show_row_icon("trash"), casein_item_path(item), :method => :delete, :data => { :confirm => "Are you sure you want to delete this item?" }) %>
+			<% end %>
 			</td>
 		</tr>
 	<% end %>

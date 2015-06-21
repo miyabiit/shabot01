@@ -14,7 +14,9 @@
 			<td><%= casein_table_cell_link project.name, casein_project_path(project) %></td>
 			<td><%= casein_table_cell_link project.category, casein_project_path(project) %></td>
 			<td class="delete">
+			<% if @session_user.is_admin? %>
 				<%= link_to(casein_show_row_icon("trash"), casein_project_path(project), :method => :delete, :data => { :confirm => "Are you sure you want to delete this project?" }) %>
+			<% end %>
 			</td>
 		</tr>
 	<% end %>
