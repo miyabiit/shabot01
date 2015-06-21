@@ -8,7 +8,7 @@ module Casein
     # before_filter :needs_admin_or_current_user, :only => [:action1, :action2]
   
     def index
-      @casein_page_title = 'Accounts'
+      @casein_page_title = 'お取引先'
   		@accounts =  Account.search(params[:search]).order(sort_order(:name)).paginate :page => params[:page]
     end
   
