@@ -1,4 +1,5 @@
 class Account < ActiveRecord::Base
+	has_many :payment_headers
   
 	validates :name, uniqueness: true
 	validates :name, length: { maximum: 30 }

@@ -1,5 +1,6 @@
 class PaymentHeader < ActiveRecord::Base
 	has_many :payment_parts
+	belongs_to :account
   
 	MAX_PARTS_LENGTH = 5
 	WHO_PAY = ["先方負担", "自社負担"]
@@ -15,6 +16,14 @@ class PaymentHeader < ActiveRecord::Base
 		end
 	end
 
+	def self.search_account(account_name)
+		if account_name
+			PaymentHeader.joins(:account).merge(Account.where(['name like ?', "%#{account_name}%"]))
+		else
+			PaymentHeader.all
+		end
+	end
+	
 	def total
 		ttl = 0
 		self.payment_parts.each do |part|

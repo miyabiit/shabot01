@@ -19,7 +19,7 @@
 		<tr>
 			<td><%= casein_table_cell_link Casein::AdminUser.find(payment_header.user_id).name, casein_payment_header_path(payment_header) %></td>
 			<td><%= casein_table_cell_link payment_header.slip_no, casein_payment_header_path(payment_header) %></td>
-			<td><%= casein_table_cell_link Account.find(payment_header.account_id).name, casein_payment_header_path(payment_header) rescue "&nsbp;" %></td>
+			<td><%= casein_table_cell_link truncate(Account.find(payment_header.account_id).name, :length => 10), casein_payment_header_path(payment_header) rescue "&nsbp;" %></td>
 			<td><%= casein_table_cell_link payment_header.payable_on, casein_payment_header_path(payment_header) %></td>
 			<td align="right"><%= casein_table_cell_link number_with_delimiter(payment_header.total), casein_payment_header_path(payment_header) %></td>
 			<td><%= casein_table_cell_link Project.find(payment_header.project_id).name_and_category, casein_payment_header_path(payment_header) %></td>
