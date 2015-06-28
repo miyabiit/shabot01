@@ -90,7 +90,11 @@ class PaymentReport < Prawn::Document
 
 		# cols = %w(申請者 支払先 金額 金額 金額 金額 金額 計 支店・口座 PROJECT 振込手数料)
 		draw_text Casein::AdminUser.find(@payment.user_id).name, :size => 12, :at => [330 ,( (700 - 25 + 7) - (25 * 0))]
-		draw_text Account.find(@payment.account_id).name, :size => 12, :at => [330 ,( (700 - 25 + 7) - (25 * 1))]
+		if account.name.length < 15
+			draw_text account.name, :size => 12, :at => [330 ,( (700 - 25 + 7) - (25 * 1))]
+		else
+			text_box account.name,  :size => 10, :at => [330 , 700 - 25], :width => 150, :height => 25, :align => :right, :valign => :center
+		end
 		total = 0
 		@payment.payment_parts.each_with_index do |part, i|
 			text_box part.amount.to_i.to_s(:delimited), :size => 12, :at => [330 ,( 700 - (25 * (i + 2)))], :width => 150, :height => 25, :align => :right, :valign => :center
