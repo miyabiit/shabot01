@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+
+	validates :name , uniqueness: { scope: [:category] }
   
 	def self.search(search)
 		if search
