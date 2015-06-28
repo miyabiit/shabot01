@@ -18,7 +18,7 @@ class PaymentHeader < ActiveRecord::Base
 	def total
 		ttl = 0
 		self.payment_parts.each do |part|
-			ttl += part.amount
+			ttl += part.amount.to_i
 		end
 		ttl
 	end
