@@ -5,7 +5,7 @@ class PaymentHeader < ActiveRecord::Base
 	MAX_PARTS_LENGTH = 5
 	WHO_PAY = ["先方負担", "自社負担"]
 	ORG_NAMES = %w(シャロンテック 聚楽荘 JAM ベルク ブルームコンサルティング その他)
-	validates :comment, length: { maximum: 200 }
+	validates :comment, length: { maximum: 400 }
 	validates :payment_parts, length: { maximum: MAX_PARTS_LENGTH }
 
 	def self.search(slip_no = nil)
