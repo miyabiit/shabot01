@@ -10,11 +10,11 @@ module Casein
     def index
       @casein_page_title = 'Payment headers'
 			if params[:search]
-  			@payment_headers = PaymentHeader.search(params[:search]).order(sort_order(:user_id)).paginate :page => params[:page]
+  			@payment_headers = PaymentHeader.onlymine(@session_user).search(params[:search]).order(sort_order(:user_id)).paginate :page => params[:page]
 			elsif params[:account_name]
-  			@payment_headers = PaymentHeader.search_account(params[:account_name]).order(sort_order(:user_id)).paginate :page => params[:page]
+  			@payment_headers = PaymentHeader.onlymine(@session_user).search_account(params[:account_name]).order(sort_order(:user_id)).paginate :page => params[:page]
 			else
-  			@payment_headers = PaymentHeader.all.order(sort_order(:user_id)).paginate :page => params[:page]
+  			@payment_headers = PaymentHeader.onlymine(@session_user).order(sort_order(:user_id)).paginate :page => params[:page]
 			end
     end
   

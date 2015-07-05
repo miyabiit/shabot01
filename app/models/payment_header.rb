@@ -23,6 +23,14 @@ class PaymentHeader < ActiveRecord::Base
 			PaymentHeader.all
 		end
 	end
+
+	def self.onlymine(user)
+		if user.is_admin?
+			PaymentHeader.all
+		else
+			PaymentHeader.where(user_id: user.id)
+		end
+	end
 	
 	def total
 		ttl = 0

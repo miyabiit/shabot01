@@ -15,7 +15,6 @@
 	</thead>
 	
 	<% payment_headers.each do |payment_header| %>
-	<% if @session_user.is_admin? or @session_user.id == payment_header.user_id %>
 		<tr>
 			<td><%= casein_table_cell_link Casein::AdminUser.find(payment_header.user_id).name, casein_payment_header_path(payment_header) %></td>
 			<td><%= casein_table_cell_link payment_header.slip_no, casein_payment_header_path(payment_header) %></td>
@@ -28,6 +27,5 @@
 				<%= link_to(casein_show_row_icon("trash"), casein_payment_header_path(payment_header), :method => :delete, :data => { :confirm => "Are you sure you want to delete this payment header?" }) %>
 			</td>
 		</tr>
-	<% end %>
 	<% end %>
 </table>

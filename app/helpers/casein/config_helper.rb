@@ -14,15 +14,15 @@ module Casein
     # The server hostname where Casein will run
     def casein_config_hostname
       if Rails.env.production?
-        'http://www.caseincms.com'
+        'http://shallontec.miyabiit.com'
       else
-        'http://0.0.0.0:3000'
+        'http://shallontec.miyabiit.com'
       end
     end
 
     # The sender address used for email notifications
     def casein_config_email_from_address
-      'donotreply@caseincms.com'
+      'donotreply@shallontec.biz'
     end
   
     # The initial page the user is shown after they sign in or click the logo. Probably this should be set to the first tab.
