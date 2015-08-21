@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 	#Casein routes
 	namespace :casein do
+		#resources :reports
 		resources :payment_parts
 		#resources :payment_headers
 		resources :accounts
@@ -11,6 +12,12 @@ Rails.application.routes.draw do
 			member do
 				get 'add_part'
 				get 'pdf'
+			end
+		end
+		resources :reports do
+			collection do
+				get 'pdf_list'
+				get 'pdf_monthly'
 			end
 		end
 	end
