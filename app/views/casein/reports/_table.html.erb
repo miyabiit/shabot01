@@ -11,8 +11,8 @@
 	
 	<% Report::ReportList.each do |name, filename, path| %>
 		<tr>
-			<td><%= casein_table_cell_link name + '&nbsp;(&nbsp;' + filename + '&nbsp;)&nbsp;', path  %></td>
-			<td><%= link_to 'PDF', filename, :class => 'btn btn-mini btn-primary' %></td>
+			<td><%= casein_table_cell_link name + '&nbsp;(&nbsp;' + filename + '&nbsp;)&nbsp;', path, {:target => '_blank'}  %></td>
+			<td><%= link_to 'PDF', path, {:class => 'btn btn-mini btn-primary', :target => '_blank'} %></td>
 			<td class="delete">
 				&nbsp;
 			</td>

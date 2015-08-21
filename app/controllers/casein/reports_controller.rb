@@ -23,7 +23,7 @@ module Casein
 
 		def pdf_monthly
       payment_headers = PaymentHeader.all
-			pdf = PaymentReport.new(payment_headers)
+			pdf = PaymentMonthly.new(payment_headers)
 			send_data pdf.render,
 				filename:	"payment-monthly.pdf",
 				type:			"application/pdf",
