@@ -1,7 +1,7 @@
 class Report < ActiveRecord::Base
 	ReportList = [
-		['プロジェクト別費目別出金・実績一覧','payment-list', '/casein/reports/pdf_list'],
-		['月別出金・実績','payment-monthly', '/casein/reports/pdf_monthly'],
+		['プロジェクト別出金予定・実績一覧','payment-list', '/casein/reports/pdf_list'],
+		['月別出金予定・実績','payment-monthly', '/casein/reports/pdf_monthly'],
 	]
 
 end
