@@ -13,21 +13,27 @@ module Casein
     end
   
 		def pdf_list
-      payment_headers = PaymentHeader.all
+			from = (begin Date.parse(params[:from]) rescue Date.parse('1999/1/1') end)
+			to = (begin Date.parse(params[:to]) rescue Date.parse('3000/1/1') end)
+      payment_headers = PaymentHeader.where(payable_on: from...to)
 			pdf = PaymentList.new(payment_headers)
 			send_data pdf.render,
 				filename:	"payment-list.pdf",
 				type:			"application/pdf",
-				disposition:	"inline"
+				# disposition:	"inline"
+				disposition:	"attachment"
 		end
 
 		def pdf_monthly
-      payment_headers = PaymentHeader.all
+			from = (begin Date.parse(params[:from]) rescue Date.parse('1999/1/1') end)
+			to = (begin Date.parse(params[:to]) rescue Date.parse('3000/1/1') end)
+      payment_headers = PaymentHeader.where(payable_on: from...to)
 			pdf = PaymentMonthly.new(payment_headers)
 			send_data pdf.render,
 				filename:	"payment-monthly.pdf",
 				type:			"application/pdf",
-				disposition:	"inline"
+				# disposition:	"inline"
+				disposition:	"attachment"
 		end
 
     def show
