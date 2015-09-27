@@ -41,7 +41,11 @@ module Casein
     
       if @account.update_attributes account_params
         flash[:notice] = 'Account has been updated'
-        redirect_to casein_accounts_path
+				if params[:new_slip]
+					redirect_to new_casein_payment_header_path(account_id: @account.id)
+				else
+        	redirect_to casein_accounts_path
+				end
       else
         flash.now[:warning] = 'There were problems when trying to update this account'
         render :action => :show
