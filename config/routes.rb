@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 			member do
 				get 'add_part'
 				get 'pdf'
+				get 'new_by_last'
 			end
 		end
 		resources :reports do

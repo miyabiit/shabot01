@@ -10,6 +10,8 @@
 			<th><%= casein_sort_link "金額", :total %></th>
 			<th><%= casein_sort_link "事業/プロジェクト", :project_id %></th>
 			<th><%= casein_sort_link "適用・目的・効果", :comment %></th>
+			<th nowrap>支払</br>申請</th>
+			<th nowrap>支払</br>申請</th>
 			<th>&nbsp;</th>
 		</tr>
 	</thead>
@@ -22,7 +24,13 @@
 			<td><%= casein_table_cell_link payment_header.payable_on, casein_payment_header_path(payment_header) %></td>
 			<td align="right"><%= casein_table_cell_link number_with_delimiter(payment_header.total), casein_payment_header_path(payment_header) %></td>
 			<td><%= casein_table_cell_link Project.find(payment_header.project_id).name_and_category, casein_payment_header_path(payment_header) %></td>
-			<td><%= casein_table_cell_link truncate(payment_header.comment, :length => 20), casein_payment_header_path(payment_header) %></td>
+			<td><%= casein_table_cell_link truncate(payment_header.comment, :length => 15), casein_payment_header_path(payment_header) %></td>
+			<td class="new">
+				<%= link_to(casein_show_row_icon("plus-sign"), new_casein_payment_header_path(account_id: payment_header.account_id)) %>
+			</td>
+			<td class="new">
+				<%= link_to(casein_show_row_icon("retweet"), new_by_last_casein_payment_header_path(payment_header)) %>
+			</td>
 			<td class="delete">
 				<%= link_to(casein_show_row_icon("trash"), casein_payment_header_path(payment_header), :method => :delete, :data => { :confirm => "Are you sure you want to delete this payment header?" }) %>
 			</td>

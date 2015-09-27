@@ -23,6 +23,20 @@ module Casein
       @payment_header = PaymentHeader.find params[:id]
     end
 
+    def new_by_last
+      @casein_page_title = 'New payment header'
+      last_payment_header = PaymentHeader.find params[:id]
+			@payment_header = last_payment_header.dup
+			@payment_header.slip_no = SlipNo.get_num
+			if @payment_header.save
+				last_payment_header.payment_parts.each do |part|
+					new_part = part.dup
+					@payment_header.payment_parts << new_part
+				end
+			end
+      render :action => :show
+    end
+
 		def pdf
       payment_header = PaymentHeader.find params[:id]
 			pdf = PaymentReport.new(payment_header)
