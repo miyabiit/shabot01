@@ -75,7 +75,7 @@ class PaymentList < Prawn::Document
 			text_box pay[1].to_s  , :size => fontsize, :at => [ 20, line_pos ], :width => 75, :height => 10, :align => :left, :valign => :center
 			text_box pay[2].to_s  , :size => fontsize, :at => [100, line_pos ], :width => 95, :height => 10, :align => :left, :valign => :center
 			text_box pay[3].to_s  , :size => fontsize, :at => [200, line_pos ], :width => 45, :height => 10, :align => :left, :valign => :center
-			text_box pay[4][0,10] , :size => fontsize, :at => [250, line_pos ], :width => 95, :height => 10, :align => :left, :valign => :center
+			text_box pay[4][0,15] , :size => fontsize, :at => [250, line_pos ], :width => 95, :height => 10, :align => :left, :valign => :center
 			text_box pay[5].to_s(:delimited) , :size => fontsize, :at => [350, line_pos ], :width => 95, :height => 10, :align => :right, :valign => :center
 			text_box pay[6].to_s  , :size => fontsize, :at => [450, line_pos ], :width => 95, :height => 10, :align => :left, :valign => :center
 			last_project = pay[2]
