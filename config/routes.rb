@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 		resources :reports do
 			collection do
 				get 'pdf_list'
+				get 'pdf_list2'
 				get 'pdf_monthly'
 			end
 		end

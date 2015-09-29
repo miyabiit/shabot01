@@ -1,4 +1,4 @@
-class PaymentList < Prawn::Document
+class PaymentList2 < Prawn::Document
 
 	def initialize(payment_headers)
 		super(
@@ -32,7 +32,7 @@ class PaymentList < Prawn::Document
 		end
 
 		pays.sort! do |a,b|
-			a.values_at(7,2,3,1,4).join("-") <=> b.values_at(7,2,3,1,4).join("-")
+			a.values_at(7,1,2,3,4).join("-") <=> b.values_at(7,1,2,3,4).join("-")
 		end
 
 		set_header
@@ -46,7 +46,7 @@ class PaymentList < Prawn::Document
 		set_title pays[0][7], line_pos, fontsize if pays.size > 0
 		line_pos -= 10
 
-		last_project = ''
+		last_day = ''
 		last_month = ''
 		total_amount = 0
 		short_amount = 0
@@ -63,7 +63,7 @@ class PaymentList < Prawn::Document
 				set_title pay[7], line_pos, fontsize
 				line_pos -= 20
 			end
-			if line_no > 1 && (pay[2] != last_project)
+			if line_no > 1 && (pay[1] != last_day)
 				text_box short_amount.to_s(:delimited) , :size => fontsize, :at => [350, line_pos ], :width => 95, :height => 10, :align => :right, :valign => :center
 				stroke do
 					horizontal_line 0, 510 , :at => line_pos
@@ -78,7 +78,7 @@ class PaymentList < Prawn::Document
 			text_box pay[4][0,10] , :size => fontsize, :at => [250, line_pos ], :width => 95, :height => 10, :align => :left, :valign => :center
 			text_box pay[5].to_s(:delimited) , :size => fontsize, :at => [350, line_pos ], :width => 95, :height => 10, :align => :right, :valign => :center
 			text_box pay[6].to_s  , :size => fontsize, :at => [450, line_pos ], :width => 95, :height => 10, :align => :left, :valign => :center
-			last_project = pay[2]
+			last_day = pay[1]
 			last_month = pay[7]
 			total_amount += pay[5].to_i
 			short_amount += pay[5].to_i
