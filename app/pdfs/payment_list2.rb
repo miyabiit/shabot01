@@ -53,6 +53,11 @@ class PaymentList2 < Prawn::Document
 		pays.each do |pay|
 			line_no += 1
 			line_pos -= 10
+			if line_pos < 40 
+				start_new_page
+				list_start = 700
+				line_pos = list_start
+			end
 			if line_no > 1 && (pay[7] != last_month)
 				set_total_before_page_break short_amount, total_amount, line_pos, fontsize = 8
 				start_new_page
@@ -71,11 +76,11 @@ class PaymentList2 < Prawn::Document
 				line_pos -= 20
 				short_amount = 0
 			end
-			text_box line_no.to_s , :size => fontsize, :at => [  0, line_pos ], :width => 15, :height => 10, :align => :left, :valign => :center
+			text_box line_no.to_s , :size => fontsize, :at => [  0, line_pos ], :width => 20, :height => 10, :align => :left, :valign => :center
 			text_box pay[1].to_s  , :size => fontsize, :at => [ 20, line_pos ], :width => 75, :height => 10, :align => :left, :valign => :center
 			text_box pay[2].to_s  , :size => fontsize, :at => [100, line_pos ], :width => 95, :height => 10, :align => :left, :valign => :center
 			text_box pay[3].to_s  , :size => fontsize, :at => [200, line_pos ], :width => 45, :height => 10, :align => :left, :valign => :center
-			text_box pay[4][0,15] , :size => fontsize, :at => [250, line_pos ], :width => 95, :height => 10, :align => :left, :valign => :center
+			text_box pay[4][0,20] , :size => fontsize, :at => [250, line_pos ], :width => 95, :height => 10, :align => :left, :valign => :center
 			text_box pay[5].to_s(:delimited) , :size => fontsize, :at => [350, line_pos ], :width => 95, :height => 10, :align => :right, :valign => :center
 			text_box pay[6].to_s  , :size => fontsize, :at => [450, line_pos ], :width => 95, :height => 10, :align => :left, :valign => :center
 			last_day = pay[1]
